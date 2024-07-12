@@ -18,7 +18,7 @@ export const Car: FC<CarProps> = ({ car, setCars }): ReactElement => {
     setNewCar({ ...newCar, [name]: value });
   };
 
-  const handleClick = () => {
+  const handleEdit = () => {
     if (!isEdit) {
       setIsEdit(true);
       return;
@@ -33,6 +33,10 @@ export const Car: FC<CarProps> = ({ car, setCars }): ReactElement => {
         return item;
       })
     );
+  };
+
+  const handleDelete = () => {
+    setCars((prevCars) => prevCars!.filter(({ id }) => id !== car.id));
   };
 
   return (
@@ -74,8 +78,11 @@ export const Car: FC<CarProps> = ({ car, setCars }): ReactElement => {
           )}
         </div>
       </div>
-      <Button type="primary" onClick={handleClick}>
+      <Button type="primary" onClick={handleEdit}>
         {isEdit ? 'Save' : 'Edit'}
+      </Button>
+      <Button danger type="primary" onClick={handleDelete}>
+        Delete
       </Button>
     </li>
   );
