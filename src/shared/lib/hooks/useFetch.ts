@@ -1,9 +1,12 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useState, useEffect } from 'react';
 
-export const useFetch = (url: string): [Car[] | null, boolean, boolean] => {
+export const useFetch = (
+  url: string
+): [Car[] | null, Dispatch<SetStateAction<Car[] | null>>, boolean, boolean] => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Car[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +29,7 @@ export const useFetch = (url: string): [Car[] | null, boolean, boolean] => {
     };
 
     fetchData();
-  }, []);
+  }, [url]);
 
-  return [data, isLoading, isError];
+  return [data, setData, isLoading, isError];
 };
