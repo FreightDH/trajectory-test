@@ -1,4 +1,8 @@
 import type { ReactElement } from 'react';
-import { ReactRouterProvider } from './provider';
+import { AntProvider, ReactRouterProvider } from './provider';
 
-export const App = (): ReactElement => <ReactRouterProvider />;
+export const App = (): ReactElement => (
+  <AntProvider>
+    <ReactRouterProvider />
+  </AntProvider>
+);
